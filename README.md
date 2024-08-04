@@ -25,5 +25,6 @@ Step 1:- run below command
 docker exec -it c5d83632cb6f4ac410f141a4078b6c907147cca1d68f337cab0881b8d9f45527 /bin/bash
 
 Step 2:- run below command
+
 /opt/spark/bin/pyspark
 
