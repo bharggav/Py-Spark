@@ -1,24 +1,27 @@
-import os
+# Import SparkSession
 from pyspark.sql import SparkSession
 
-# Set the path to Python executable
-os.environ['PYSPARK_PYTHON'] = r'C:\Users\bharg\AppData\Local\Programs\Python\Python35-32\python.exe'  
-# Update with your Python path
+# Create SparkSession 
+spark = SparkSession.builder.master("local[1]").appName("test1").getOrCreate() 
 
-# Create SparkSession
-spark = SparkSession.builder \
-    .master("local[1]") \
-    .appName("test1") \
-    .config("spark.pyspark.python", os.environ['PYSPARK_PYTHON']) \
-    .getOrCreate()
+##if session is stared active session will be there we need to sopt the session and recreate it.
 
-# Create DataFrame
-data = [('James', '', 'Smith', '1991-04-01', 'M', 3000),
-        ('Michael', 'Rose', '', '2000-05-19', 'M', 4000),
-        ('Robert', '', 'Williams', '1978-09-05', 'M', 4000),
-        ('Maria', 'Anne', 'Jones', '1967-12-01', 'F', 4000),
-        ('Jen', 'Mary', 'Brown', '1980-02-17', 'F', -1)]
-columns = ["firstname", "middlename", "lastname", "dob", "gender", "salary"]
+from pyspark.sql import SparkSession
 
-df = spark.createDataFrame(data=data, schema=columns)
-df.show()
+# Check if a SparkSession already exists
+if not SparkSession.getActiveSession():
+    spark = SparkSession.builder.master("local[1]").appName("test1").getOrCreate()
+else:
+    spark = SparkSession.getActiveSession()
+
+
+or 
+
+from pyspark.sql import SparkSession
+
+# Stop any existing SparkSession
+spark = SparkSession.builder.master("local[1]").appName("test1").getOrCreate()
+spark.stop()
+
+# Create a new SparkSession
+spark = SparkSession.builder.master("local[1]").appName("test1").getOrCreate()
