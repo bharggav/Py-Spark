@@ -150,14 +150,11 @@ df.withColumn('formatted_date', date_format(col('date_column'), 'yyyy-MM-dd')).s
 
 df.withColumn('sub_name', col('name').substr(1, 3)).show()
 
-26. when / otherwise
-Purpose: Perform conditional operations on columns.
-Example:
-python
-Copy code
-from pyspark.sql.functions import when
+#when / otherwise:- Perform conditional operations on columns.
 
+from pyspark.sql.functions import when
 df.withColumn('category', when(col('id') > 1, 'High').otherwise('Low')).show()
+
 27. lag / lead
 Purpose: Access data from a previous or next row.
 Example:
