@@ -23,7 +23,7 @@ df = spark.createDataFrame(data=data, schema = columns)
 #show:- Display the first few rows of a DataFrame.
 df.show()
 
-(or)
+#(or)
 
 # Create DataFrame
 df1 = spark.createDataFrame([('James','','Smith','1991-04-01','M',3000),
@@ -103,86 +103,53 @@ df.describe().show()
 df.cache().count()  # Trigger cache by performing an action
 
 
-15. alias
-Purpose: Rename a column or DataFrame.
-Example:
-python
-Copy code
+#Alias:- Rename a column or DataFrame.
 df.select(col('name').alias('employee_name')).show()
-16. withColumnRenamed
-Purpose: Rename a column in a DataFrame.
-Example:
-python
-Copy code
+
+#withColumnRenamed:- Rename a column in a DataFrame.
 df.withColumnRenamed('name', 'employee_name').show()
-17. dropna
-Purpose: Remove rows with null or NaN values.
-Example:
-python
-Copy code
+
+#dropna:- Remove rows with null or NaN values.
 df.dropna().show()
-18. fillna
-Purpose: Replace null or NaN values with a specified value.
-Example:
-python
-Copy code
+
+#fillna:- Replace null or NaN values with a specified value.
 df.fillna({'id': 0, 'name': 'Unknown'}).show()
-19. na.drop / na.fill
-Purpose: Drop or fill missing values using the na functions.
-Example:
-python
-Copy code
+
+#na.drop / na.fill:- Drop or fill missing values using the na functions.
 # Drop rows with any null values
 df.na.drop().show()
-
 # Fill null values with a specific value
 df.na.fill({'name': 'Unknown'}).show()
-20. cast
-Purpose: Change the data type of a column.
-Example:
-python
-Copy code
-df.withColumn('id', col('id').cast('string')).show()
-21. explode
-Purpose: Convert an array or map column to multiple rows.
-Example:
-python
-Copy code
-from pyspark.sql.functions import explode, array
 
+#cast:- Change the data type of a column.
+df.withColumn('id', col('id').cast('string')).show()
+
+#explode:- Convert an array or map column to multiple rows.
+
+from pyspark.sql.functions import explode, array
 df = spark.createDataFrame([(1, [2, 3]), (4, [5, 6])], ['id', 'values'])
 df.select('id', explode('values')).show()
-22. concat
-Purpose: Concatenate multiple columns into a single column.
-Example:
-python
-Copy code
+
+#concat:- Concatenate multiple columns into a single column.
+
 from pyspark.sql.functions import concat, col
-
 df.withColumn('full_name', concat(col('first_name'), lit(' '), col('last_name'))).show()
-23. split
-Purpose: Split a column into multiple columns based on a delimiter.
-Example:
-python
-Copy code
-from pyspark.sql.functions import split
 
+#split:- Split a column into multiple columns based on a delimiter.
+
+from pyspark.sql.functions import split
 df = spark.createDataFrame([('John Doe',)], ['name'])
 df.select(split(col('name'), ' ').alias('split_name')).show()
-24. date_format
-Purpose: Format a date column as a string.
-Example:
-python
-Copy code
-from pyspark.sql.functions import date_format
 
+#date_format:- Format a date column as a string.
+
+from pyspark.sql.functions import date_format
 df.withColumn('formatted_date', date_format(col('date_column'), 'yyyy-MM-dd')).show()
-25. substring
-Purpose: Extract a substring from a column.
-Example:
-python
-Copy code
+
+#substring:- Extract a substring from a column.
+
 df.withColumn('sub_name', col('name').substr(1, 3)).show()
+
 26. when / otherwise
 Purpose: Perform conditional operations on columns.
 Example:
