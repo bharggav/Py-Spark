@@ -20,6 +20,7 @@ Step 1:- run below command
 ***docker exec -it 24bdf6d2f3a83230b3d7589176f48c56ce9698332102a04e6896fb3a10dbaf57 /bin/bash***
 Step 2:- run below command
 ***/opt/spark/bin/pyspark***
+
 Reference link:- https://hub.docker.com/r/apache/spark-py
 
 ### Method 3:- By me
