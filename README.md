@@ -37,5 +37,5 @@ System is shutdow your container has stoped then follow below steps
 ## ***docker ps (or) docker ps -a*** 
 ## ***docker start "spark_container_name(or)container_id"***
 ## ***docker exec -it "spark_container_name(or)container_id" /bin/bash***
-## ***pyspark***
+## ***./bin/pyspark***
 Reference link:- https://hub.docker.com/r/bharggavgalla/pyspark
